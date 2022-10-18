@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>JavaScript Shield UI Demos</title>
+    <link id="themecss" rel="stylesheet" type="text/css" href="//www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+    <script type="text/javascript" src="//www.shieldui.com/shared/components/latest/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="//www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+</head>
+<body class="theme-light">
+<div id="chart"></div>
+<script type="text/javascript">
+    $(function () {
+        $("#chart").shieldChart({
+            theme: "light",
+            exportOptions: {
+                image: false,
+                print: false
+            },
+            axisX: {
+                categoricalValues: ['2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012']
+            },
+            axisY: {
+                axisTickText: {
+                    format: "{text:c}"
+                },
+                title: {
+                    text: "Price (EUR per kWh)"
+                }
+            },
+            tooltipSettings: {
+                chartBound: true
+            },
+            seriesSettings: {
+                line: {
+                    enablePointSelection: true,
+                    pointMark: {
+                        activeSettings: {
+                            pointSelectedState: {
+                                drawWidth: 4,
+                                drawRadius: 4
+                            }
+                        }
+                    }
+                }
+            },
+            primaryHeader: {
+                text: "Electricity prices"
+            },
+            dataSeries: [{
+                seriesType: 'line',
+                collectionAlias: 'Households',
+                data: [0.164, 0.173, 0.184, 0.167, 0.177, 0.189, 0.180, 0.183, 0.188, 0.160, 0.176, 0.178]
+            }, {
+                seriesType: 'line',
+                collectionAlias: 'Industry',
+                data: [0.103, 0.105, 0.112, 0.111, 0.102, 0.099, 0.110, 0.113, 0.117, 0.119, 0.123, 0.117]
+            }]
+        });
+    });
+</script>
+</body>
+</html>
