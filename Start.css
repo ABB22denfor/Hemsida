@@ -1,3 +1,75 @@
 body{
+    display: flex;
     background-color: #181C30;
+    flex-direction: row;
+    justify-content: center;
+    color: white;
+}
+.site-container{
+    display: flex;
+    margin-top: 50px;
+    width: 1000px;
+    height: 1000px;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.totH{
+    display: flex;
+    width: 150px;
+    height: 200px;
+    background-color: rgb(75, 11, 75);
+    align-items: center;
+    justify-content: center;
+    justify-content: space-around;
+    flex-direction: row;
+}
+.Counter{
+    display: flex;
+    width: 150px;
+    height: 200px;
+    background-color: rgb(75, 11, 75);
+    align-items: center;
+    justify-content: center;
+    justify-content: space-around;
+    flex-direction: row;
+}
+.CounterH{
+    display: flex;
+    height: 200px;
+    width: 150px;
+    background-color: rgb(75, 11, 75);
+    align-items: center;
+    justify-content: center;
+    justify-content: space-around;
+    flex-direction: row;
+}
+.SenastO{
+    display: flex;
+    height: 200px;
+    width: 150px;
+    background-color: rgb(75, 11, 75);
+    align-items: center;
+    justify-content: center;
+    justify-content: space-around;
+    flex-direction: row;
+}
+.Temp{
+    display: flex;
+    height: 200px;
+    width: 150px;
+    background-color: rgb(75, 11, 75);
+    align-items: center;
+    justify-content: center;
+    justify-content: space-around;
+    flex-direction: row;
+}
+.Hum{
+    display: flex;
+    height: 200px;
+    width: 150px;
+    background-color: rgb(75, 11, 75);
+    align-items: center;
+    justify-content: center;
+    justify-content: space-around;
+    flex-direction: row;
 }
