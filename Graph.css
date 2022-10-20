@@ -4,13 +4,13 @@ svg {
 }
 
 path {
-    fill: rgba(47, 165, 203, 0.1);
+    fill: rgba(75, 11, 75, 0.5);
     stroke-width: 2.5;
-    stroke: rgb(47, 164, 203);
+    stroke: rgb(105, 16, 105);
 }
 
 g#graph-points {
-    fill: rgb(9, 9, 151);
+    fill: rgb(105, 11, 105);
     stroke-width: 1;
     stroke: none;
 }
@@ -53,6 +53,8 @@ body{
 }
 .Graph-Row {
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .Content-Container {
     display: flex;

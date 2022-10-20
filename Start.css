@@ -5,10 +5,9 @@ body{
 }
 .site-container{
     display: flex;
-    margin-top: 50px;
     width: 1000px;
-    height: 1000px;
-    justify-content: space-between;
+    height: 500px;
+    justify-content: space-around;
     flex-direction: column;
 }
 .Options-Row{
