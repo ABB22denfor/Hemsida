@@ -51,7 +51,7 @@ line {
 body{
     background-color: rgb(0,0,40);
 }
-.Graph-Container {
+.Graph-Row {
     display: flex;
 }
 .Content-Container {

@@ -6,29 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="Start.css">
+    <link rel="stylesheet" href="Graph.css">
 </head>
 <body>
     <div class="site-container">
-        <div class="totH">
-            <div>Total hours</div>
+        <div class="Options-Row">
+            <div class="totH">
+                <div>Total hours</div>
+            </div>
+            <div class="Counter">
+                <div>Times opened</div>
+            </div>
+            <div class="CounterH">
+                <div>Per Hour</div>
+            </div>
+            <div class="SenastO">
+                <div>Last opened</div>
+            </div>
+            <div class="Temp">
+                <div>Temperature</div>
+            </div>
+            <div class="Hum">
+                <div>Humidity</div>
+            </div>
         </div>
-        <div class="Counter">
-            <div>Times opened</div>
-        </div>
-        <div class="CounterH">
-            <div>Per Hour</div>
-        </div>
-        <div class="SenastO">
-            <div>Last opened</div>
-        </div>
-        <div class="Temp">
-            <div>Temperature</div>
-        </div>
-        <div class="Hum">
-            <div>Humidity</div>
+        <div class="Graph-Row">
+            <section id="svg-path">
+                <section id="card"></section>
+            </section>
         </div>
     </div>
 
     <script src="Start.js"></script>
+    <script src="Graph.js"></script>
 </body>
 </html>

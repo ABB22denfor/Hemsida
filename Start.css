@@ -1,8 +1,6 @@
 body{
     display: flex;
     background-color: #181C30;
-    flex-direction: row;
-    justify-content: center;
     color: white;
 }
 .site-container{
@@ -11,7 +9,12 @@ body{
     width: 1000px;
     height: 1000px;
     justify-content: space-between;
+    flex-direction: column;
+}
+.Options-Row{
+    display: flex;
     flex-direction: row;
+    justify-content: space-around;
 }
 .totH{
     display: flex;
