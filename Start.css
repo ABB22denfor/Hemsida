@@ -1,80 +1,77 @@
-<<<<<<< HEAD
-=======
-body{
-    display: flex;
-    background-color: #181C30;
-    color: white;
+body {
+  display: flex;
+  background-color: #181c30;
+  color: white;
 }
-.site-container{
-    display: flex;
-    width: 1000px;
-    height: 500px;
-    justify-content: space-around;
-    flex-direction: column;
+.site-container {
+  display: flex;
+  width: 1000px;
+  height: 500px;
+  justify-content: space-around;
+  flex-direction: column;
 }
-.Options-Row{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+.Options-Row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
-.totH{
-    display: flex;
-    width: 150px;
-    height: 200px;
-    background-color: rgb(75, 11, 75);
-    align-items: center;
-    justify-content: center;
-    justify-content: space-around;
-    flex-direction: row;
+.totH {
+  display: flex;
+  width: 150px;
+  height: 200px;
+  background-color: rgb(75, 11, 75);
+  align-items: center;
+  justify-content: center;
+  justify-content: space-around;
+  flex-direction: row;
 }
-.Counter{
-    display: flex;
-    width: 150px;
-    height: 200px;
-    background-color: rgb(75, 11, 75);
-    align-items: center;
-    justify-content: center;
-    justify-content: space-around;
-    flex-direction: row;
+.Counter {
+  display: flex;
+  width: 150px;
+  height: 200px;
+  background-color: rgb(75, 11, 75);
+  align-items: center;
+  justify-content: center;
+  justify-content: space-around;
+  flex-direction: row;
 }
-.CounterH{
-    display: flex;
-    height: 200px;
-    width: 150px;
-    background-color: rgb(75, 11, 75);
-    align-items: center;
-    justify-content: center;
-    justify-content: space-around;
-    flex-direction: row;
+.CounterH {
+  display: flex;
+  height: 200px;
+  width: 150px;
+  background-color: rgb(75, 11, 75);
+  align-items: center;
+  justify-content: center;
+  justify-content: space-around;
+  flex-direction: row;
 }
-.SenastO{
-    display: flex;
-    height: 200px;
-    width: 150px;
-    background-color: rgb(75, 11, 75);
-    align-items: center;
-    justify-content: center;
-    justify-content: space-around;
-    flex-direction: row;
+.SenastO {
+  display: flex;
+  height: 200px;
+  width: 150px;
+  background-color: rgb(75, 11, 75);
+  align-items: center;
+  justify-content: center;
+  justify-content: space-around;
+  flex-direction: row;
 }
-.Temp{
-    display: flex;
-    height: 200px;
-    width: 150px;
-    background-color: rgb(75, 11, 75);
-    align-items: center;
-    justify-content: center;
-    justify-content: space-around;
-    flex-direction: row;
+.Temp {
+  display: flex;
+  height: 200px;
+  width: 150px;
+  background-color: rgb(75, 11, 75);
+  align-items: center;
+  justify-content: center;
+  justify-content: space-around;
+  flex-direction: row;
 }
-.Hum{
-    display: flex;
-    height: 200px;
-    width: 150px;
-    background-color: rgb(75, 11, 75);
-    align-items: center;
-    justify-content: center;
-    justify-content: space-around;
-    flex-direction: row;
+.Hum {
+  display: flex;
+  height: 200px;
+  width: 150px;
+  background-color: rgb(75, 11, 75);
+  align-items: center;
+  justify-content: center;
+  justify-content: space-around;
+  flex-direction: row;
 }
->>>>>>> 1eeee3fcb1e4e8ade723424e898db73ad4542029
