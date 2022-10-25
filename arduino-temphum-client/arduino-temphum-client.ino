@@ -12,6 +12,7 @@ void setup() {
   Serial.begin(BAUD_VALUE); // Allocates the Serial Monitor value
   Wire.begin(SENSOR_PIN1, SENSOR_PIN2); // Allocates the pins for the AM2320 sensor
   display.begin(SSD1306_SWITCHCAPVCC, DISPLAY_ADDR);
+  setTime(12, 30, 0, 25, 10, 2022);
 
   // Tries to connect to the local WIFI using the WIFI SSID and Password
   if(!connect_local_wifi(WIFI_SSID, WIFI_PASW))
@@ -31,7 +32,11 @@ void setup() {
 // The loop function will execute continuously. Collect values and push them to the Firebase database
 void loop() 
 {
-  const char timeString[] = "2022-10-20 14:05";
+  char timeString[128];
+  if(!sprintf(timeString, "%04d-%02d-%02d %02d:%02d:%02d", year(), month(), day(), hour(), minute(), second()))
+  {
+    sprintf(timeString, "time-error");
+  }
   
   float sensorTemp = 0.0f, sensorHum = 0.0f; int errorCode;
 
@@ -52,7 +57,6 @@ void loop()
   }
   else Serial.println("Displayed temperature and humidity on screen");
 
-  
   // Tries to push the temperature and humidity to the Firebase database
   if(!push_sensor_values(STREAM_PATH, sensorTemp, sensorHum, timeString))
   {

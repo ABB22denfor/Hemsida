@@ -10,6 +10,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <VL53L0X.h>
+#include <TimeLib.h>
 
 #include "arduino-temphum-client.h"
 #include "temphum-client-defines.h"
