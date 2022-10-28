@@ -29,7 +29,7 @@ x.on("child_added", (snapshot) => {
 
   let str = JSON.stringify(newdata.temperature);
 
-  document.getElementById("temp").innerHTML = str;
+  document.getElementById("tempValue").innerHTML = str;
+  temp.push(str);
+  console.log(temp);
 });
-
-temp.push(str);
