@@ -1,10 +1,7 @@
 const svgPathParent = document.getElementById("svg-path");
 const card = document.getElementById("card");
 //test arrays: uncomment the array you would like to use and comment the rest otherwise you will get error
-const dataPath2 = [
-  60, 20, 30, 50, 14, 22, 38, 54, 74, 98, 130, 84, 60, 96, 120, 156, 180, 98,
-  138, 100, 160, 90, 76, 30, 78, 118, 132, 88, 44,
-];
+let dataPath2 = [60, 20, 30, 50, 14, 22, 38, 54, 74, 98, 130, 84, 60, 96, 120, 156, 180, 98, 138, 100, 160, 90, 76, 30, 78, 118, 132, 88, 44];
 //const dataPath2 = [180, 60, 90, 150, 42, 66, 114, 162, 222, 294, 390, 252, 180, 288, 360, 468, 540, 294, 414, 300, 480, 270, 228, 90, 234, 354, 396, 264, 132];
 //const dataPath2 = [120, 40, 60, 100, 28, 44, 76, 108, 148, 196, 260, 168, 120, 192, 240, 312, 360, 196, 276, 200, 320, 180, 152, 60, 156, 236, 264, 176, 88];
 
