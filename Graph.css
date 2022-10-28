@@ -1,69 +1,67 @@
-
 svg {
-    border: 1px solid rgb(255, 255, 255);
+  border: 1px solid rgb(255, 255, 255);
 }
 
 path {
-    fill: rgba(75, 11, 75, 0.5);
-    stroke-width: 2.5;
-    stroke: rgb(105, 16, 105);
+  fill: rgba(75, 11, 75, 0.5);
+  stroke-width: 2.5;
+  stroke: rgb(105, 16, 105);
 }
 
 g#graph-points {
-    fill: rgb(105, 11, 105);
-    stroke-width: 1;
-    stroke: none;
+  fill: rgb(105, 11, 105);
+  stroke-width: 1;
+  stroke: none;
 }
 
 g#graph-lines {
-    fill: rgb(255, 255, 255);
-    stroke: rgb(188, 198, 223);
+  fill: rgb(255, 255, 255);
+  stroke: rgb(188, 198, 223);
 }
 
 g#graph-texts {
-    fill: white;
-    stroke-width: 1;
-    stroke: none;
-    text-anchor: middle;
-    font-size: 20px;
-    font-family: 'Times New Roman', Times, serif;
-
+  fill: white;
+  stroke-width: 1;
+  stroke: none;
+  text-anchor: middle;
+  font-size: 20px;
+  font-family: "Times New Roman", Times, serif;
 }
 
 line {
-    stroke: rgb(188, 197, 219);
+  stroke: rgb(188, 197, 219);
 }
 
 #card {
-    position: relative;
-    width: 150px;
-    height: 50px;
-    padding: 3px;
-    border-radius: 5px;
-    font-size: 20px;
-    font-weight: bold;
-    background-color: rgba(255, 255, 255, 0.932);
-    box-shadow: 1px 5px 5px gray;
-    color: black;
-    display: none;
+  position: relative;
+  width: 150px;
+  height: 50px;
+  padding: 3px;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.932);
+  box-shadow: 1px 5px 5px gray;
+  color: black;
+  display: none;
 }
 
-body{
-    background-color: rgb(0,0,40);
+body {
+  background-color: rgb(0, 0, 40);
 }
 .Graph-Row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .Content-Container {
-    display: flex;
-    height: 500px;
-    align-items: center;
-    justify-content: center;
-    justify-content: space-around;
-    flex-direction: column;
+  display: flex;
+  height: 500px;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-around;
+  flex-direction: column;
 }
 .text {
-    color: white;
+  color: white;
 }

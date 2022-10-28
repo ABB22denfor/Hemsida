@@ -16,13 +16,20 @@ const firebaseConfig = {
 
   measurementId: "G-HVPMQXDD53",
 };
-
+let temp = [];
 firebase.initializeApp(firebaseConfig);
 
 db = firebase.database();
 
-var x = db.ref("Rum1");
+var x = db.ref("/");
 
-x.on("value", (snapshot) => {
-  console.log(snapshot.val());
+x.on("child_added", (snapshot) => {
+  const newdata = snapshot.val();
+  console.log(newdata);
+
+  let str = JSON.stringify(newdata.temperature);
+
+  document.getElementById("temp").innerHTML = str;
 });
+
+temp.push(str);
