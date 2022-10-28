@@ -9,9 +9,9 @@ document.getElementById("humValue").innerText = "6";
 
 var checkbox1 = document.getElementById('checkbox1');
 var adv = document.getElementById('adv');
-var menu2 = document.getElementById('menu2');
+var none = document.getElementById('none');
 
-menu2.style.display = 'none';
+none.style.display = 'none';
 
 checkbox1.onchange = function () {
   if (checkbox1.checked) {
