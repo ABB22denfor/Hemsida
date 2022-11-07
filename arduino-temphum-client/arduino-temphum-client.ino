@@ -4,15 +4,21 @@
 
 // Declare variables for the temperature-humidity sensor and the Firebase database object
 AM2320 THSensor;
+
 FirebaseData fbaseData;
+
 Adafruit_SSD1306 display(DISPLAY_WIDTH, DISPLAY_HEIGHT, &Wire, -1, 400000UL, 100000UL);
+
+WiFiUDP ntpUDP; NTPClient timeClient(ntpUDP, "pool.ntp.org");
 
 // The setup function connects to the local WIFI and setups communication with the Firebase database
 void setup() {
   Serial.begin(BAUD_VALUE); // Allocates the Serial Monitor value
   Wire.begin(SENSOR_PIN1, SENSOR_PIN2); // Allocates the pins for the AM2320 sensor
   display.begin(SSD1306_SWITCHCAPVCC, DISPLAY_ADDR);
-  setTime(12, 30, 0, 25, 10, 2022);
+
+  print_display_string("CONNECT\nWIFI\n", 0, 0, TEXT_COLOR, TEXT_SIZE);
+
 
   // Tries to connect to the local WIFI using the WIFI SSID and Password
   if(!connect_local_wifi(WIFI_SSID, WIFI_PASW))
@@ -20,6 +26,12 @@ void setup() {
     Serial.println("Error: Could not connect to local WIFI");
   }
   else Serial.println("Success! Connected to WIFI");
+
+
+  timeClient.begin(); timeClient.setTimeOffset(0);
+
+  print_display_string("CONNECT\nFBASE\n", 0, 0, TEXT_COLOR, TEXT_SIZE);
+
  
   // Tries to setup and connect to the Firebase Database
   if(!setup_connect_dbase(STREAM_PATH, DBASE_HOST, DBASE_AUTH))
@@ -32,11 +44,7 @@ void setup() {
 // The loop function will execute continuously. Collect values and push them to the Firebase database
 void loop() 
 {
-  char timeString[128];
-  if(!sprintf(timeString, "%04d-%02d-%02d %02d:%02d:%02d", year(), month(), day(), hour(), minute(), second()))
-  {
-    sprintf(timeString, "time-error");
-  }
+  timeClient.update(); time_t epochTime = timeClient.getEpochTime();
   
   float sensorTemp = 0.0f, sensorHum = 0.0f; int errorCode;
 
@@ -49,7 +57,9 @@ void loop()
   }
   else Serial.println("Collected temperature and humidity from sensor");
 
-  Serial.println("TimeString: " + String(timeString) + "\tSensorTemp: " + String(sensorTemp) + "\tSensorHum: " + String(sensorHum));
+
+  Serial.println("EpochTime: " + String(epochTime) + "\tSensorTemp: " + String(sensorTemp) + "\tSensorHum: " + String(sensorHum));
+
   
   if(!display_sensor_values(sensorTemp, sensorHum))
   {
@@ -57,8 +67,9 @@ void loop()
   }
   else Serial.println("Displayed temperature and humidity on screen");
 
+
   // Tries to push the temperature and humidity to the Firebase database
-  if(!push_sensor_values(STREAM_PATH, sensorTemp, sensorHum, timeString))
+  if(!push_sensor_values(STREAM_PATH, sensorTemp, sensorHum, epochTime))
   {
     // Prints out the error that occured when pushing the values
     Serial.println("Error: " + fbaseData.errorReason());
@@ -70,31 +81,25 @@ void loop()
 
 bool display_sensor_values(float sensorTemp, float sensorHum)
 {
-  display.setTextColor(TEXT_COLOR); 
-  display.setTextSize(TEXT_SIZE);
+  char string[128];
+  if(!sprintf(string, "TEMP: %.1f\nHUM: %.1f\n", sensorTemp, sensorHum)) return false;
 
-  display.clearDisplay();
-  display.setCursor(0, 0);
-
-  display.print("TEMP:"); display.println(sensorTemp);
-  display.print("HUM :"); display.println(sensorHum);
-
-  display.display();
+  print_display_string(string, 0, 0, TEXT_COLOR, TEXT_SIZE);
 
   return true;
 }
 
-bool push_sensor_values(const char streamPath[], float sensorTemp, float sensorHum, const char timeString[])
+bool push_sensor_values(const char streamPath[], float sensorTemp, float sensorHum, time_t epochTime)
 {
-  char tempPath[128], humPath[128];
+  char tempPath[128], humPath[128], timePath[128];
 
-  if(!sprintf(tempPath, "%s/%s/temperature", streamPath, timeString) ||
-      !sprintf(humPath, "%s/%s/humidity", streamPath, timeString)) return false;
+  if(!sprintf(tempPath, "%s/%lld/temperature", streamPath, epochTime) ||
+    !sprintf(humPath, "%s/%lld/humidity", streamPath, epochTime) ||
+    !sprintf(timePath, "%s/%lld/epochTime", streamPath, epochTime)) return false;
 
-  if(!Firebase.setFloat(fbaseData, tempPath, sensorTemp) ||
-      !Firebase.setFloat(fbaseData, humPath, sensorHum)) return false;
-
-  return true;
+  return (Firebase.setFloat(fbaseData, tempPath, sensorTemp) &&
+    Firebase.setFloat(fbaseData, humPath, sensorHum) &&
+    Firebase.setInt(fbaseData, timePath, epochTime));
 }
 
 // Collects temperature and humidity from the AM2320 sensor, stores them in pointers and return if successful
@@ -126,11 +131,9 @@ bool connect_local_wifi(const char wifiSSID[], const char wifiPasw[])
  
   WiFi.begin(wifiSSID, wifiPasw);
   
-  for(int index = 0; WiFi.status() != WL_CONNECTED; index += 1)
+  for(int index = 0; (index >= CONNECT_TRIES && WiFi.status() != WL_CONNECTED); index += 1)
   {
     Serial.print("Connecting to WIFI: "); Serial.println(index + 1);
-
-    if(index >= CONNECT_TRIES) break; 
     
     delay(WIFI_DELAY);
   }
@@ -147,4 +150,15 @@ bool setup_connect_dbase(const char streamPath[], const char dbaseHost[], const 
 
   // Tries to begin the Firebase database stream
   return Firebase.beginStream(fbaseData, streamPath);
+}
+
+bool print_display_string(const char string[], int width, int height, uint16_t textColor, int textSize)
+{
+  display.clearDisplay(); display.setCursor(width, height);
+
+  display.setTextColor(TEXT_COLOR);
+  display.setTextSize(TEXT_SIZE);
+
+  display.print(string); display.display();
+  return true;
 }
