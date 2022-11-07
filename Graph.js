@@ -1,19 +1,21 @@
 const svgPathParent = document.getElementById("svg-path");
 const card = document.getElementById("card");
-//test arrays: uncomment the array you would like to use and comment the rest otherwise you will get error
-let dataPath2 = [60, 20, 30, 50, 14, 22, 38, 54, 74, 98, 130, 84, 60, 96, 120, 156, 180, 98, 138, 100, 160, 90, 76, 30, 78, 118, 132, 88, 44];
-//const dataPath2 = [180, 60, 90, 150, 42, 66, 114, 162, 222, 294, 390, 252, 180, 288, 360, 468, 540, 294, 414, 300, 480, 270, 228, 90, 234, 354, 396, 264, 132];
-//const dataPath2 = [120, 40, 60, 100, 28, 44, 76, 108, 148, 196, 260, 168, 120, 192, 240, 312, 360, 196, 276, 200, 320, 180, 152, 60, 156, 236, 264, 176, 88];
+
+let temp = [180, 60, 90, 150, 42, 66, 114, 162, 222, 294, 390, 252, 180, 288, 360, 468, 540, 294, 414, 300, 480, 270, 228, 90, 234, 354, 396, 264, 132];
+let time = [1200, 1240, 1241, 1300, 1450, 1500, 1510, 1520, 1530, 1540, 1550, 1600, 1700, 1710, 1720, 1730, 1800, 1810, 1820, 1830, 1840, 1850, 1900, 1910, 1920, 1930, 1940, 1950, 2000];
 
 
-function dataVisualization(array, frequency, linecount) {
+console.log(temp.length)
+console.log(time.length)
+
+function dataVisualization(temparray, timearray, frequency, linecount) {
     const svgElment = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     const svgPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    const days = array.length;
-    const maxVal = Math.max(...array);
-    const widthSvg = days * frequency;
-    const heightSvg = maxVal + 30;
-    const graphLine = maxVal / (linecount - 1);
+    const time = timearray.length;
+    const maxVal = Math.max(...temparray);
+    const widthSvg = time * frequency;
+    const heightSvg = (maxVal + 30)/2;
+    const graphLine = (maxVal / (linecount - 1));
 
     svgElment.setAttributeNS(null, "width", widthSvg);
     svgElment.setAttributeNS(null, "height", heightSvg);
@@ -31,8 +33,8 @@ function dataVisualization(array, frequency, linecount) {
     // base line
     let pathString = "M" + widthSvg + " " + heightSvg + " L" + 0 + " " + widthSvg;
 
-    for (let d = 0; d < days; d++) {
-        const yValue = heightSvg - dataPath2[d], xValue = d * frequency;
+    for (let t = 0; t < time; t++) {
+        const yValue = heightSvg - temp[t]/2, xValue = t * frequency;
         const newString = " L" + xValue + " " + yValue;
         pathString += newString;
 
@@ -41,15 +43,16 @@ function dataVisualization(array, frequency, linecount) {
         circleEl.setAttributeNS(null, "cx", xValue);
         circleEl.setAttributeNS(null, "cy", yValue);
         circleEl.setAttributeNS(null, "r", "8");
-        circleEl.addEventListener("mouseover", (e) => {card.style = `top:${yValue}px; left:${xValue - 75}px; display: block;`;
+        circleEl.addEventListener("mouseover", (e) => {card.style = `top:${yValue}px; left:${xValue - 75}px; display: block;`
+        card.innerHTML = `Temp: ${temp[t]}°C <br>Time: ${timearray[t]}`});
+        gElCircle.appendChild(circleEl);
+    }
     
     // generate date
-    const date_ = new Date(Date.now() - ((days - d) * (24 * 60 * 60 * 1000))).toJSON().split("T")[0];
-    card.innerHTML = `Views: ${dataPath2[d]} <br>Date: ${date_}`;});
-    gElCircle.appendChild(circleEl);}
+    //const date_ = new Date(Date.now() - ((days - d) * (24 * 60 * 60 * 1000))).toJSON().split("T")[0];
 
 
-    const ends = heightSvg - dataPath2[days - 1];
+    const ends = heightSvg - timearray[time - 1];
     pathString += " L" + widthSvg + " " + ends;
     pathString += " Z";
     svgPath.setAttributeNS(null, "d", pathString);
@@ -58,14 +61,14 @@ function dataVisualization(array, frequency, linecount) {
     for (let l = 0; l < linecount; l++) {
         const lineEl = document.createElementNS("http://www.w3.org/2000/svg", "line");
         const textEl = document.createElementNS("http://www.w3.org/2000/svg", "text");
-        const yPosition = heightSvg - (l * graphLine);
+        const yPosition = (heightSvg - (l * graphLine));
         lineEl.setAttributeNS(null, "x1", "0");
         lineEl.setAttributeNS(null, "y1", yPosition);
         lineEl.setAttributeNS(null, "x2", widthSvg);
         lineEl.setAttributeNS(null, "y2", yPosition);
         gElLine.appendChild(lineEl);
 
-        const txt = l * graphLine;
+        const txt = (l * graphLine) *2;
         textEl.setAttributeNS(null, "dx", "-20");
         textEl.setAttributeNS(null, "x", widthSvg);
         textEl.setAttributeNS(null, "y", yPosition);
@@ -84,4 +87,4 @@ function dataVisualization(array, frequency, linecount) {
     svgPathParent.appendChild(svgElment);
 }
 
-dataVisualization(dataPath2, 30, 3);
+dataVisualization(temp, time, 20, 10);

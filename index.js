@@ -1,4 +1,4 @@
-const firebaseConfig = {
+/*const firebaseConfig = {
   apiKey: "AIzaSyDLclgVeRlX41rhbNlMkZ5Pd-dcz4J-1tM",
 
   authDomain: "kylskap-c5f3b.firebaseapp.com",
@@ -26,3 +26,5 @@ var x = db.ref("Rum1");
 x.on("value", (snapshot) => {
   console.log(snapshot.val());
 });
+
+temp.push()*/

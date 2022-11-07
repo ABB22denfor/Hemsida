@@ -56,9 +56,6 @@
 }
 .box2 {
     background-color: rgb(111, 36, 181);
-    color: white;
-    height: 200px;
-    width: 600px;
     display: flex;
     justify-content: center;
     align-items: center;
