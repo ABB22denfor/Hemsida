@@ -9,9 +9,9 @@ path {
 }
 
 g#graph-points {
-  fill: rgb(105, 11, 105);
-  stroke-width: 1;
-  stroke: none;
+    fill: rgba(105, 11, 105, 0);
+    stroke-width: 1;
+    stroke: none;
 }
 
 g#graph-lines {
