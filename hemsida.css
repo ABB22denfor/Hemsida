@@ -1,10 +1,11 @@
 body {
-    background-image: url(https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/13-fridge-interior-allan-swart.jpg);
+    background-image: url("./Pictures/frys.jpg");
     background-repeat: no-repeat;
-    background-size:100%;
+    background-size: cover;
     margin: 0;
     padding: 0;
 }
+
 
 .row1 {
     /* background-color:rgb(20, 20, 20); */
@@ -16,22 +17,23 @@ body {
     align-items: center;
 }
 .box1 {
-    /* background-color:rgb(72, 0, 72); */
-    background-image: url("./Cola.png");
+    /* background-color:rgb(72, 0, 72);
+    border-radius: 10px; */
+    background-image: url("./Pictures/Cola.png");
     background-repeat: no-repeat;
     background-size:cover;
     color: white;
-    height: 250px;
-    width: 135px;
-    border-radius: 10px;
+    height: 245px;
+    width: 130px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .textClass {
     color:white;
+    -webkit-text-stroke: 1px black;
     margin: 0;
-    font-size: 30px;
+    font-size: 40px;
 }
 #count {
     display:flex;
@@ -41,6 +43,7 @@ body {
 }
 #countValue {
     color: white;
+    -webkit-text-stroke: 2px black;
     margin: 0;
     font-size: 100px;
 }
@@ -52,6 +55,7 @@ body {
 }
 #tempValue {
     color: white;
+    -webkit-text-stroke: 2px black;
     margin: 0;
     font-size: 100px;
 }
@@ -60,16 +64,16 @@ body {
 
 .row2 {
     /* background-color: rgb(59, 59, 59); */
-    height: 250px;
+    height: 420px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
 }
 .box2 {
     background-color: rgb(111, 36, 181);
     color: white;
-    height: 200px;
-    width: 600px;
+    height: 280px;
+    width: 650px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,16 +87,21 @@ body {
     justify-content: flex-end;
 }
 .switch {
-    background-color:rgb(111, 36, 181);
+    /* background-color:rgb(111, 36, 181);
+    border-radius: 15px; */
+    background-image: url("./Pictures/smör.png");
+    background-repeat: no-repeat;
+    background-size:110%;
+    background-position-y: -35px;
+    background-position-x: -5px;
     color: white;
-    font-size: 25px;
+    -webkit-text-stroke: 1px black;
+    font-size: 31px;
     height: 60px;
-    width: 160px;
-    border-radius: 15px;
+    width: 180px;
     display: flex;
     justify-content: center;
     align-items: center;
-    justify-content: space-around;
 }
 .switch input { 
     opacity: 0;
@@ -123,18 +132,22 @@ input:checked + .slider {
 
 .row4 {
     /* background-color: rgb(59, 59, 59); */
-    height: 450px;
+    height: 280px;
     display: flex;
-    justify-content: center;
+
+}
+.row5 {
+    width:100%;
+    display: flex;
     align-items: flex-end;
     justify-content: space-around;
 }
 .box4 {
-    /* background-color: rgb(111, 36, 181); */
+    /* background-color: rgb(111, 36, 181);
+    height: 220px;
+    width: 200px;
+    border-radius: 10px; */
     color: white;
-    /* height: 220px;
-    width: 200px; */
-    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -143,7 +156,7 @@ input:checked + .slider {
 
 
 #total {
-    background-image: url(https://pngimg.com/uploads/fanta/fanta_PNG53.png);
+    background-image: url("./Pictures/fanta.png");
     background-repeat: no-repeat;
     background-size:cover;
     background-position: center;
@@ -156,17 +169,19 @@ input:checked + .slider {
 }
 #totalValue {
     color: white;
+    -webkit-text-stroke: 2px black;
     margin: 0;
     font-size: 100px;
 }
 #textTotal {
     color:white;
+    -webkit-text-stroke: 1px black;
     margin: 0;
-    font-size: 30px;
+    font-size: 40px;
 }
 
 #per {
-    background-image: url(https://cy.coca-colahellenic.com/en/our-24-7-portfolio/explore-our-brands/sprite/_jcr_content/root/container_1001829178/teaser.coreimg.png/1600073102125/1256x800-sprite-330ml.png);
+    background-image: url("./Pictures/sprite.png");
     background-repeat: no-repeat;
     background-size: 350%;
     background-position: center;
@@ -179,17 +194,19 @@ input:checked + .slider {
 }
 #perValue {
     color: white;
+    -webkit-text-stroke: 2px black;
     margin: 0;
     font-size: 100px;
 }
 #textPer {
     color:white;
+    -webkit-text-stroke: 1px black;
     margin: 0;
-    font-size: 30px;
+    font-size: 40px;
 }
 
 #last {
-    background-image: url(https://www.shoprite.co.za/medias/10375474EA-checkers515Wx515H?context=bWFzdGVyfGltYWdlc3wxMzM1Mzl8aW1hZ2UvcG5nfGltYWdlcy9oNGIvaDVmLzk5ODcxNTk2NTQ0MzAucG5nfDg0ZTVjZDQ1N2JjMzZkNzAxOTI1MDlkZmY2MjdiYWI4ZjllM2ZiYzAyYWFiZWQzNWIxZmE0NzBhY2VjNmMwNjA);
+    background-image: url("./Pictures/monster.png");
     background-repeat: no-repeat;
     background-size: 185%;
     background-position: center;
@@ -202,17 +219,19 @@ input:checked + .slider {
 }
 #lastValue {
     color: white;
+    -webkit-text-stroke: 2px black;
     margin: 0;
     font-size: 100px;
 }
 #textLast {
     color:white;
+    -webkit-text-stroke: 1px black;
     margin: 0;
-    font-size: 30px;
+    font-size: 36px;
 }
 
 #hum {
-    background-image: url(https://www.pepsico.com/images/default-source/products-brands/pepsi_12oz.png?sfvrsn=46c9ae09_0);
+    background-image: url("./Pictures/pepsi.png");
     background-repeat: no-repeat;
     background-size: 190%;
     background-position: center;
@@ -225,11 +244,13 @@ input:checked + .slider {
 }
 #humValue {
     color: white;
+    -webkit-text-stroke: 2px black;
     margin: 0;
     font-size: 100px;
 }
 #textHum {
     color:white;
+    -webkit-text-stroke: 1px black;
     margin: 0;
-    font-size: 30px;
+    font-size: 33px;
 }
