@@ -16,15 +16,39 @@
 
   measurementId: "G-HVPMQXDD53",
 };
-
+let count = 0;
+let temp = [];
+let hump = [];
 firebase.initializeApp(firebaseConfig);
 
 db = firebase.database();
 
-var x = db.ref("Rum1");
+var x = db.ref("/");
 
-x.on("value", (snapshot) => {
-  console.log(snapshot.val());
+x.on("child_added", (snapshot) => {
+  const newdata = snapshot.val();
+  console.log(newdata);
+
+  let tmp = JSON.stringify(newdata.temperature);
+  let hum = JSON.stringify(newdata.humidity);
+
+  document.getElementById("tempValue").innerHTML = tmp;
+  temp.push(tmp);
+  console.log(temp);
+
+  document.getElementById("humValue").innerHTML = hum;
+  hump.push(hum);
+  console.log(hump);
+
+  let recent = temp[temp.length - 1];
+  let prev = temp[temp.length - 2];
+  console.log(temp[temp.length - 2]);
+
+  if (recent < 10 && prev > 15) {
+    count++;
+  }
+  document.getElementById("countValue").innerHTML = count;
+  console.log(count);
 });
 
 temp.push()*/
