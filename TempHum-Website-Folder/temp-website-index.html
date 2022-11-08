@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="hemsida.css">
-    <link rel="stylesheet" href="Graph.css">
+
+    <title>Group 3 - Temperature Website</title>
+
+    <link rel="stylesheet" href="temp-website-styles.css">
+    <link rel="stylesheet" href="temp-graph-styles.css">
 </head>
 <body id="body">
     <div class="row1">
@@ -19,7 +21,6 @@
             <p id="tempValue"></p>
         </div>
     </div>
-
     <div class="row2">
         <div class="box2">
             <section id="svg-path">
@@ -27,7 +28,6 @@
             </section>
         </div>
     </div>
-
     <div class="row3">
         <form>
             <label class="switch">
@@ -36,19 +36,18 @@
             </label>
         </form>
     </div>
-
     <div class="row4">
         <div class="row5" id="adv">
             <div class="box4" id="total">
-                <p id="textTotal">Total <br> hours</p>
+                <p id="textTotal">Total <br> Hours</p>
                 <p id="totalValue"></p>
             </div>
             <div class="box4" id="per">
-                <p id="textPer">Per <br> hour</p>
+                <p id="textPer">Per <br> Hour</p>
                 <p id="perValue"></p>
             </div>
             <div class="box4" id="last">
-                <p id="textLast">Last <br> opend</p>
+                <p id="textLast">Last <br> Opened</p>
                 <p id="lastValue"></p>
             </div>
             <div class="box4" id="hum">
@@ -61,9 +60,9 @@
     <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-database.js"></script>
 
-    <script src="hemsida.js"></script>
-    <script src="Graph.js"></script>
-    <script src="Start.js"></script>
-    <script src="index.js"></script>
+    <script src="temp-website-source.js"></script>
+    <script src="temp-graph-source.js"></script>
+    <script src="website-start-source.js"></script>
+    <script src="extract-parse-values.js"></script>
 </body>
 </html>

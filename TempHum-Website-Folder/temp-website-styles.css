@@ -1,5 +1,5 @@
 body {
-    background-image: url("./Pictures/frys.jpg");
+    background-image: url("../Website-Images-Folder/kyl-image.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     margin: 0;
@@ -19,7 +19,7 @@ body {
 .box1 {
     /* background-color:rgb(72, 0, 72);
     border-radius: 10px; */
-    background-image: url("./Pictures/Cola.png");
+    background-image: url("../Website-Images-Folder/cola-image.png");
     background-repeat: no-repeat;
     background-size:cover;
     color: white;
@@ -89,7 +89,7 @@ body {
 .switch {
     /* background-color:rgb(111, 36, 181);
     border-radius: 15px; */
-    background-image: url("./Pictures/smör.png");
+    background-image: url("../Website-Images-Folder/smör-image.png");
     background-repeat: no-repeat;
     background-size:110%;
     background-position-y: -35px;
@@ -156,7 +156,7 @@ input:checked + .slider {
 
 
 #total {
-    background-image: url("./Pictures/fanta.png");
+    background-image: url("../Website-Images-Folder/fanta-image.png");
     background-repeat: no-repeat;
     background-size:cover;
     background-position: center;
@@ -181,7 +181,7 @@ input:checked + .slider {
 }
 
 #per {
-    background-image: url("./Pictures/sprite.png");
+    background-image: url("../Website-Images-Folder/sprite-image.png");
     background-repeat: no-repeat;
     background-size: 350%;
     background-position: center;
@@ -206,7 +206,7 @@ input:checked + .slider {
 }
 
 #last {
-    background-image: url("./Pictures/monster.png");
+    background-image: url("../Website-Images-Folder/monster-image.png");
     background-repeat: no-repeat;
     background-size: 185%;
     background-position: center;
@@ -231,7 +231,7 @@ input:checked + .slider {
 }
 
 #hum {
-    background-image: url("./Pictures/pepsi.png");
+    background-image: url("../Website-Images-Folder/pepsi-image.png");
     background-repeat: no-repeat;
     background-size: 190%;
     background-position: center;
