@@ -74,3 +74,5 @@ function update_page_values(tempValue, humValue, countValue) {
 
   document.getElementById("countValue").innerHTML = countValue;
 }
+
+let stringTime = JSON.stringify(datapoint.epochTime);
