@@ -1,16 +1,10 @@
-/*document.getElementById("countValue").innerText = "1";
-document.getElementById("tempValue").innerText = "2";
-document.getElementById("totalValue").innerText = "3";
-document.getElementById("perValue").innerText = "4";
-document.getElementById("lastValue").innerText = "5";
-document.getElementById("humValue").innerText = "6";*/
+var checkbox1 = document.getElementById('checkbox1');
+var adv = document.getElementById('adv');
+var none = document.getElementById('none');
 
-var checkbox1 = document.getElementById("checkbox1");
-var adv = document.getElementById("adv");
-var menu2 = document.getElementById("menu2");
+none.style.display = 'none';
 
-menu2.style.display = "none";
-
+//Används för att få Advanced knappen att visa en viss div
 checkbox1.onchange = function () {
   if (checkbox1.checked) {
     adv.style.display = "flex";
