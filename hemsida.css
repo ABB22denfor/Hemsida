@@ -45,7 +45,12 @@
     font-size: 100px;
 }
 
+.chart{
 
+    position: relative;
+    width: 500px;
+    height: 250px;
+}
 
 .row2 {
     background-color: rgb(59, 59, 59);
@@ -55,7 +60,7 @@
     align-items: center;
 }
 .box2 {
-    background-color: rgb(111, 36, 181);
+    background-color: rgba(111, 36, 181, 0);
     display: flex;
     justify-content: center;
     align-items: center;

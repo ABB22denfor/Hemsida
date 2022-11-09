@@ -7,8 +7,10 @@
     <title>Document</title>
     <link rel="stylesheet" href="hemsida.css">
     <link rel="stylesheet" href="Graph.css">
-</head>
+    <!--<script type="text/javascript" src="jquery.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="></script>
+    -->
 <body id="body">
+    
     <div class="row1">
         <div class="box1" id="count">
             <p class="textClass">Count</p>
@@ -22,9 +24,9 @@
 
     <div class="row2">
         <div class="box2">            
-            <section id="svg-path">
-                <section id="card"></section>
-            </section>
+            <div class="chart">
+                <canvas id="myChart"></canvas>
+            </div>
         </div>
     </div>
 
@@ -61,9 +63,15 @@
 
     <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"
+        integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    ></script>
     <script src="hemsida.js"></script>
     <script src="Graph.js"></script>
-    <script src="Start.js"></script>
-    <script src="Index.js"></script>
+    <!--<script src="Start.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="index.js"></script>-->
 </body>
 </html>

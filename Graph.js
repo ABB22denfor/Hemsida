@@ -1,12 +1,132 @@
+//Använder Chart.js bibliotek
+
+//Hämta chart context från canvasen i 2D
+const ctx = document.getElementById('myChart').getContext("2d");
+
+//Skapa backgroundGradient
+let backgroundGradient = ctx.createLinearGradient(0, 0, 0, 400);
+backgroundGradient.addColorStop(0, "rgba(255, 255, 255, 1)");
+backgroundGradient.addColorStop(1, "rgba(255, 255, 255, 0.1)")
+
+//Skapa borderGradient
+let borderGradient = ctx.createLinearGradient(0, 0, 0, 400);
+borderGradient.addColorStop(0, "rgba(0, 0, 0, 0.3)");
+borderGradient.addColorStop(1, "rgba(0, 0, 0, 0.1)");
+
+//Labels = Tid/X-axeln
+const labels = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
+"16", "17", "18", "19", "20"
+];
+
+//Beskriver vad för data som grafen ska använda
+//x,
+//y
+const data = {
+    labels,
+    datasets: [
+        {
+            data: [0, 7, 7, 8, 7.9, 8.4, 7.7, 8, 7.5, 7, 7.3 ,7.6, 8, 8.1, 8.3, 7.7, 8, 7, 7, 7.2, 7],
+            label: "Temperatur",
+            fill: true,
+            backgroundColor: backgroundGradient,
+            borderColor: borderGradient
+        },
+    ],
+};
+
+//Fäster data och inställningar till grafen
+const config = {
+    type: 'line',
+    data: data,
+    options: {
+        responsive: true,
+        scales: {
+            y:{
+                ticks:{
+                    callback: function(value){
+                        return value + "°C"
+                    }
+                }
+            }
+        }
+    },
+};
+
+//Skapar grafen
+const myChart = new Chart(ctx, config);
+
+
+
+//Försök att göra graf med hjälp av D3-biblioteket:
+/*
+let seconds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let temp = [7, 7, 8, 7, 7, 7.5, 8, 8.1, 8, 7.9];
+let recenttemp = temp[temp.length-1];
+let recentseconds = seconds[seconds.length-1];
+
+document.addEventListener("DOMContentLoaded", (e) =>{
+    drawChart(recenttemp, recentseconds, temp, seconds);
+});
+
+function drawChart(value, definition, valuearray, definitionarray){
+    var svgWidth = 500, svgHeight = 250;
+    var margin ={top: 20, right: 20, bottom: 30, left: 50};
+    var width = svgWidth - margin.left - margin.right;
+    var height = svgHeight - margin.top - margin.bottom;
+
+    var svg = d3.select('svg')
+        .attr("width", svgWidth)
+        .attr("height", svgHeight);
+    
+    var g = svg.append("g")
+        .attr("transform", `translate(${margin.left}, ${margin.right})`);
+
+    var x = d3.scaleLinear()
+        .domain([0, d3.max(definition)])
+        .rangeRound([0, width]);
+
+    var y = d3.scaleLinear()
+        .domain([0, d3.max(value)])
+        .rangeRound([height, 0]);
+
+    var line = d3.line()
+        .x(function() {return x(definition)})
+        .y(function() {return y(value)})
+        x.domain(d3.extent(definitionarray[0], definition));
+        y.domain(d3.extent(valuearray[0], value));
+    
+    g.append("g")
+        .attr("transform", `translate(0, ${height})`)
+        .call(d3.axisBottom(x))
+        .select(".domain")
+        .remove();
+
+    g.append("g")
+        .call(d3.axisLeft(y))
+        .append("text")
+        .attr("fill", "#000")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", "0.71em")
+        .attr("text-anchor", "end")
+        .text("Grader (°C)");
+
+    g.append("path")
+        .datum(valuearray)
+        .attr("fill", "none")
+        .attr("stroke", "steelblue")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-width", 1.5)
+        .attr("d", line);
+
+};
+
+
+//Försök att göra graf med SVG (Scalable-Vector-Graphics) och ren JS:
+
 const svgPathParent = document.getElementById("svg-path");
-const card = document.getElementById("card");
-
-let temp = [180, 60, 90, 150, 42, 66, 114, 162, 222, 294, 390, 252, 180, 288, 360, 468, 540, 294, 414, 300, 480, 270, 228, 90, 234, 354, 396, 264, 132];
-let time = [1200, 1240, 1241, 1300, 1450, 1500, 1510, 1520, 1530, 1540, 1550, 1600, 1700, 1710, 1720, 1730, 1800, 1810, 1820, 1830, 1840, 1850, 1900, 1910, 1920, 1930, 1940, 1950, 2000];
-
-
-console.log(temp.length)
-console.log(time.length)
+let tempa = [180, 60, 90, 150, 42, 66, 114, 162, 222, 294, 390, 252, 180, 288, 360, 468, 540, 294, 414, 300, 480, 270, 228, 90, 234, 354, 396, 264, 132];
+let time = [330, 400, 300, 200, 186, 406, 256, 348, 421, 185, 217, 295, 124, 249, 320, 219, 298, 399, 499, 230, 172, 237, 318, 247, 205, 415, 192, 272, 271];
 
 function dataVisualization(temparray, timearray, frequency, linecount) {
     const svgElment = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -20,7 +140,6 @@ function dataVisualization(temparray, timearray, frequency, linecount) {
     svgElment.setAttributeNS(null, "width", widthSvg);
     svgElment.setAttributeNS(null, "height", heightSvg);
 
-    // g tags for grouping other tags
     const gElCircle = document.createElementNS("http://www.w3.org/2000/svg", "g");
     gElCircle.id = "graph-points";
 
@@ -30,11 +149,10 @@ function dataVisualization(temparray, timearray, frequency, linecount) {
     const gElText = document.createElementNS("http://www.w3.org/2000/svg", "g");
     gElText.id = "graph-texts";
 
-    // base line
     let pathString = "M" + widthSvg + " " + heightSvg + " L" + 0 + " " + widthSvg;
 
     for (let t = 0; t < time; t++) {
-        const yValue = heightSvg - temp[t]/2, xValue = t * frequency;
+        const yValue = heightSvg - tempa[t]/2, xValue = t * frequency;
         const newString = " L" + xValue + " " + yValue;
         pathString += newString;
 
@@ -42,14 +160,19 @@ function dataVisualization(temparray, timearray, frequency, linecount) {
 
         circleEl.setAttributeNS(null, "cx", xValue);
         circleEl.setAttributeNS(null, "cy", yValue);
-        circleEl.setAttributeNS(null, "r", "8");
-        circleEl.addEventListener("mouseover", (e) => {card.style = `top:${yValue}px; left:${xValue - 75}px; display: block;`
-        card.innerHTML = `Temp: ${temp[t]}°C <br>Time: ${timearray[t]}`});
+        circleEl.setAttributeNS(null, "r", "5");
+        circleEl.addEventListener("mouseover", (e) => { 
+            const card = document.createElement("section");
+            card.id="card";     
+            card.style = `top:${yValue}px; left:${xValue - 75}px; display: block;`
+            card.innerHTML = `Temp: ${tempa[t]}°C <br>Time: ${timearray[t]}`
+            svgPathParent.appendChild(card);
+        });
+        circleEl.addEventListener("mouseout", (e) => {svgPathParent.removeChild(card);})
         gElCircle.appendChild(circleEl);
     }
     
-    // generate date
-    //const date_ = new Date(Date.now() - ((days - d) * (24 * 60 * 60 * 1000))).toJSON().split("T")[0];
+    
 
 
     const ends = heightSvg - timearray[time - 1];
@@ -57,7 +180,6 @@ function dataVisualization(temparray, timearray, frequency, linecount) {
     pathString += " Z";
     svgPath.setAttributeNS(null, "d", pathString);
 
-    // lines and texts
     for (let l = 0; l < linecount; l++) {
         const lineEl = document.createElementNS("http://www.w3.org/2000/svg", "line");
         const textEl = document.createElementNS("http://www.w3.org/2000/svg", "text");
@@ -83,8 +205,7 @@ function dataVisualization(temparray, timearray, frequency, linecount) {
     svgElment.appendChild(gElText);
     svgElment.appendChild(svgPath);
 
-    // base parent or graph container
     svgPathParent.appendChild(svgElment);
 }
 
-dataVisualization(temp, time, 20, 10);
+dataVisualization(tempa, time, 20, 10);*/

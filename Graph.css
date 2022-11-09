@@ -9,7 +9,7 @@ path {
 }
 
 g#graph-points {
-    fill: rgba(105, 11, 105, 0);
+    fill: rgba(105, 11, 105, 1);
     stroke-width: 1;
     stroke: none;
 }

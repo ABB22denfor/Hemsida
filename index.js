@@ -1,4 +1,4 @@
-/*const firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyDLclgVeRlX41rhbNlMkZ5Pd-dcz4J-1tM",
 
   authDomain: "kylskap-c5f3b.firebaseapp.com",
@@ -21,7 +21,7 @@ let temp = [];
 let hump = [];
 firebase.initializeApp(firebaseConfig);
 
-db = firebase.database();
+const db = firebase.database();
 
 var x = db.ref("/");
 
@@ -35,20 +35,20 @@ x.on("child_added", (snapshot) => {
   document.getElementById("tempValue").innerHTML = tmp;
   temp.push(tmp);
   console.log(temp);
-
+  
   document.getElementById("humValue").innerHTML = hum;
   hump.push(hum);
   console.log(hump);
+  //x(newdata).remove();
 
   let recent = temp[temp.length - 1];
   let prev = temp[temp.length - 2];
   console.log(temp[temp.length - 2]);
 
-  if (recent < 10 && prev > 15) {
+  if (prev >= 8.6 && recent <= 8.5) {
     count++;
   }
   document.getElementById("countValue").innerHTML = count;
   console.log(count);
 });
 
-temp.push()*/
