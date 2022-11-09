@@ -9,55 +9,58 @@
     <link rel="stylesheet" href="Graph.css">
 </head>
 <body id="body">
-    <div class="row1">
-        <div class="box1" id="count">
-            <p class="textClass">Count</p>
-            <p id="countValue"></p>
-        </div>
-        <div class="box1" id="temp">
-            <p class="textClass">Temp</p>
-            <p id="tempValue"></p>
-        </div>
-    </div>
-
-    <div class="row2">
-        <div class="box2">
-            <section id="svg-path">
-                <section id="card"></section>
-            </section>
-        </div>
-    </div>
-
-    <div class="row3">
-        <form>
-            <label class="switch">
-                <input type="checkbox" id="checkbox1">Advanced</input>
-                <div class="slider round"></div>
-            </label>
-        </form>
-    </div>
-
-    <div class="row4">
-        <div class="row5" id="adv">
-            <div class="box4" id="total">
-                <p id="textTotal">Total <br> hours</p>
-                <p id="totalValue"></p>
+    <div class="all"> <!-- div class=all används för att hjälpa storleken på allt om man har olika windows scale -->
+        <div class="row1">
+            <div class="box1">
+                <p class="textClass">Count</p> <!-- p class=textClass används för att få samma egenskaper till nästan all text -->
+                <p id="countValue"></p> <!-- Alla p som har ett id som slutar med Value är ett värde på en av sakerna -->
             </div>
-            <div class="box4" id="per">
-                <p id="textPer">Per <br> hour</p>
-                <p id="perValue"></p>
-            </div>
-            <div class="box4" id="last">
-                <p id="textLast">Last <br> opend</p>
-                <p id="lastValue"></p>
-            </div>
-            <div class="box4" id="hum">
-                <p id="textHum">Humidity</p>
-                <p id="humValue"></p>
+            <div class="box1">
+                <p class="textClass">Temp</p>
+                <p id="tempValue"></p>
             </div>
         </div>
+    
+        <div class="row2">
+            <div class="box2">
+                <section id="svg-path">
+                    <section id="card"></section>
+                </section>
+            </div>
+        </div>
+    
+        <div class="row3">
+            <form>
+                <label class="switch">
+                    <input type="checkbox" id="checkbox1">Advanced</input> <!-- input id=checkbox1 gör så att javascript koden för advanced funkar -->
+                    <div class="slider round"></div> <!-- div class=slider round används för att vissa pilen -->
+                </label>
+            </form>
+        </div>
+    
+        <div class="row4"> <!-- div class=row4 används för att kunna vissa hella backgrundsbilden i samma storlek oavsett vilken scale på windows -->
+            <div class="row5" id="adv"> <!-- div id=adv hjälper till att göra så att allt i den inte syns och sen syns när man trycker på advanced -->
+                <div class="box4" id="total"> <!-- div id=total gör så att man kan sätta olika bilder på dom  -->
+                    <p class="textClass">Total <br> hours</p>
+                    <p id="totalValue"></p>
+                </div>
+                <div class="box4" id="per">
+                    <p class="textClass">Per <br> hour</p>
+                    <p id="perValue"></p>
+                </div>
+                <div class="box4" id="last">
+                    <p class="textClass">Last <br> opened</p>
+                    <p id="lastValue"></p>
+                </div>
+                <div class="box4" id="hum">
+                    <p class="textClass">Humidity</p>
+                    <p id="humValue"></p>
+                </div>
+            </div>
+        </div>
+        <div id ="none"></div>
     </div>
-    <div id ="none"></div>
+    
 
     <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-database.js"></script>
