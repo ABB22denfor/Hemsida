@@ -34,7 +34,7 @@ body {
 
 /* Lägger till cola burkar */
 .box1 {
-    background-image: url("./Pictures/Cola.png");
+    background-image: url("../Website-Images-Folder/cola-image.png");
     background-repeat: no-repeat;
     background-size:cover;
     color: white;
@@ -109,7 +109,7 @@ body {
 /* Egenskaper som gör så att Advanced ser ut som den gör */
 .switch {
     user-select: none;
-    background-image: url("./Pictures/smör.png");
+    background-image: url("../Website-Images-Folder/smör-image.png");
     background-repeat: no-repeat;
     background-size:110%;
     background-position-y: -35px;
