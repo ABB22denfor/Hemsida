@@ -32,7 +32,7 @@ streamData.on("child_added", (snapshot) => {
   console.log(
     `tempvalue: ${tempValue}   
       humValue: ${humValue}
-     countValue: ${tempValue}`
+     countValue: ${countValue}`
   );
 
   update_page_values(tempValue, humValue, countValue);
@@ -63,7 +63,7 @@ function update_count_value(dataPoints, countValue) {
   if (dataPoints.length < 2) prevTemp = currentTemp;
   else prevTemp = dataPoints[dataPoints.length - 2].temperature;
 
-  if (currentTemp <= 8.5 && prevTemp >= 8.6) return countValue + 1;
+  if (currentTemp >= 8.6 && prevTemp <= 8.5) return countValue + 1;
   else return countValue;
 
 }
