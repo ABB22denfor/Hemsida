@@ -14,6 +14,7 @@ firebase.initializeApp(firebaseConfig); // importar firebase så att vi kan läs
 
 var openedCount = 0;
 var dataPoints = [];
+var timeArray = [];
 
 dataBase = firebase.database();
 
@@ -35,6 +36,10 @@ streamData.on("child_added", (snapshot) => {
 
   update_page_values(tempValue, humValue, countValue);
 });
+
+function update_graph(time) {
+  timeArray.push(time);
+}
 
 /* streamData.once("value", (snapshot) => {
   snapshot.ref.remove();
@@ -63,7 +68,10 @@ function create_page_values(dataPoints) {
   let totalTime = calculate_total_time(dataPoints);
   let perHourValue = calcualte_per_hour(dataPoints);
   let lastOpened = calculate_last_opened(dataPoints);
+  let stringTime = JSON.stringify(dataPoint.epochTime);
 
+  update_graph(stringTime);
+  
   return [currentTemp, currentHum, openedCount, totalTime];
 }
 
@@ -75,4 +83,4 @@ function update_page_values(tempValue, humValue, countValue) {
   document.getElementById("countValue").innerHTML = countValue;
 }
 
-let stringTime = JSON.stringify(datapoint.epochTime);
+
