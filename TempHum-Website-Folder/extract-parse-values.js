@@ -30,7 +30,7 @@ streamData.on("child_added", (snapshot) => {
   console.log(
     `tempvalue: ${tempValue}   
       humValue: ${humValue}
-     countValue: ${tempValue}`
+     countValue: ${countValue}`
   );
 
   update_page_values(tempValue, humValue, countValue);
