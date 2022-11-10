@@ -65,14 +65,18 @@ function create_page_values(dataPoints) {
 
   openedCount = update_count_value(dataPoints, openedCount);
 
-  let totalTime = calculate_total_time(dataPoints);
+  /* let totalTime = calculate_total_time(dataPoints);
   let perHourValue = calcualte_per_hour(dataPoints);
-  let lastOpened = calculate_last_opened(dataPoints);
+  let lastOpened = calculate_last_opened(dataPoints);*/
+  let TimeBetween = dataPoint.epochTime - timeArray[0];
   let stringTime = JSON.stringify(dataPoint.epochTime);
+  let Timmar = (TimeBetween - (TimeBetween % 3600)) / 3600;
+  console.log(`Timmar: ${Timmar}`);
+  Timmar = JSON.stringify(Timmar);
 
-  update_graph(stringTime);
-  
-  return [currentTemp, currentHum, openedCount, totalTime];
+  update_graph(Timmar);
+
+  return [currentTemp, currentHum, openedCount, currentTime];
 }
 
 function update_page_values(tempValue, humValue, countValue) {
@@ -82,5 +86,3 @@ function update_page_values(tempValue, humValue, countValue) {
 
   document.getElementById("countValue").innerHTML = countValue;
 }
-
-
