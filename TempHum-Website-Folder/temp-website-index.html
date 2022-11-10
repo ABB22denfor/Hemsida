@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Group 3 - Temperature Website</title>
+
+    <link rel="stylesheet" href="temp-website-styles.css">
+    <link rel="stylesheet" href="temp-graph-styles.css">
+</head>
+<body id="body">
+    <div class="all"> <!-- div class=all används för att hjälpa storleken på allt om man har olika windows scale -->
+        <div class="row1">
+            <div class="box1">
+                <p class="textClass">Count</p> <!-- p class=textClass används för att få samma egenskaper till nästan all text -->
+                <p id="countValue"></p> <!-- Alla p som har ett id som slutar med Value är ett värde på en av sakerna -->
+            </div>
+            <div class="box1">
+                <p class="textClass">Temp</p>
+                <p id="tempValue"></p>
+            </div>
+        </div>
+
+        <div class="row2">
+            <div class="box2">
+                <div class="chart">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="row3">
+            <form>
+                <label class="switch">
+                    <input type="checkbox" id="checkbox1">Advanced</input> <!-- input id=checkbox1 gör så att javascript koden för advanced funkar -->
+                    <div class="slider round"></div> <!-- div class=slider round används för att vissa pilen -->
+                </label>
+            </form>
+        </div>
+
+        <div class="row4"> <!-- div class=row4 används för att kunna vissa hella backgrundsbilden i samma storlek oavsett vilken scale på windows -->
+            <div class="row5" id="adv"> <!-- div id=adv hjälper till att göra så att allt i den inte syns och sen syns när man trycker på advanced -->
+                <div class="box4" id="total"> <!-- div id=total gör så att man kan sätta olika bilder på dom  -->
+                    <p class="textClass">Total <br> hours</p>
+                    <p id="totalValue"></p>
+                </div>
+                <div class="box4" id="per">
+                    <p class="textClass">Per <br> hour</p>
+                    <p id="perValue"></p>
+                </div>
+                <div class="box4" id="last">
+                    <p class="textClass">Last <br> opened</p>
+                    <p id="lastValue"></p>
+                </div>
+                <div class="box4" id="hum">
+                    <p class="textClass">Humidity</p>
+                    <p id="humValue"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"
+        integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    ></script>
+
+    <script src="temp-website-source.js"></script>
+    <script src="temp-graph-source.js"></script>
+    <script src="website-start-source.js"></script>
+    <script src="extract-parse-values.js"></script>
+</body>
+</html>

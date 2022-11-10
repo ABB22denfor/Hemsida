@@ -1,3 +1,4 @@
+
 const firebaseConfig = {
   apiKey: "AIzaSyDLclgVeRlX41rhbNlMkZ5Pd-dcz4J-1tM",
   authDomain: "kylskap-c5f3b.firebaseapp.com",
@@ -14,6 +15,7 @@ firebase.initializeApp(firebaseConfig); // importar firebase så att vi kan läs
 
 var openedCount = 0;
 var dataPoints = [];
+var timeArray = [];
 
 dataBase = firebase.database();
 
@@ -78,7 +80,14 @@ function create_page_values(dataPoints) {
 
   openedCount = update_count_value(dataPoints, openedCount);
 
-  return [currentTemp, currentHum, openedCount, totalValue];
+  let totalTime = calculate_total_time(dataPoints);
+  let perHourValue = calcualte_per_hour(dataPoints);
+  let lastOpened = calculate_last_opened(dataPoints);
+  let stringTime = JSON.stringify(dataPoint.epochTime);
+
+  update_graph(stringTime);
+  
+  return [currentTemp, currentHum, openedCount, totalValue, totalTime];
 }
 
 function update_page_values(tempValue, humValue, countValue, totalValue, perValue, lastValue) {
