@@ -14,9 +14,7 @@ borderGradient.addColorStop(0, "rgba(0, 0, 0, 0.3)");
 borderGradient.addColorStop(1, "rgba(0, 0, 0, 0.1)");
 
 //Labels = Tid/X-axeln
-const labels = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
-"16", "17", "18", "19", "20"
-];
+const labels = timeArray;
 
 //Beskriver vad för data som grafen ska använda
 //x,
@@ -29,7 +27,8 @@ const data = {
             label: "Temperatur",
             fill: true,
             backgroundColor: backgroundGradient,
-            borderColor: borderGradient
+            borderColor: borderGradient,
+            pointBackgroundColor: none,
         },
     ],
 };
