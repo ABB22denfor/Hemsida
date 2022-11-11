@@ -88,9 +88,13 @@ function create_page_values(dataPoints) {
   console.log(`Timmar: ${Timmar}`);
   Timmar = JSON.stringify(Timmar);
 
-  update_graph(stringTime);
+  update_graph(Timmar);
 
   return [currentTemp, currentHum, openedCount, totalTime];
+}
+
+function update_graph(time) {
+  timeArray.push(time);
 }
 
 function update_page_values(
