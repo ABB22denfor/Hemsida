@@ -27,7 +27,7 @@ streamData.on("child_added", (snapshot) => {
 
   dataPoints.push(dataPoint);
 
-  let [tempValue, humValue, countValue] = create_page_values(dataPoints);
+  let [tempValue, humValue, countValue, perValue, lastValue] = create_page_values(dataPoints);
 
   console.log(
     `tempvalue: ${tempValue}   
@@ -35,22 +35,29 @@ streamData.on("child_added", (snapshot) => {
      countValue: ${countValue}`
   );
 
-  update_page_values(tempValue, humValue, countValue);
-  calculate_total_time(dataPoints)
-  calculate_per_hour(dataPoints) 
+  update_page_values(tempValue, humValue, countValue, totalValue, perValue, lastValue);
 });
 
-function calculate_total_time(dataPoints) {
-  return ((dataPoints.currentTime - 1667928163)/3600)
+function calculate_total_time(time) {
+  totalValue =(time - 1667928163)/3600
+  totalValue = round_values(totalValue, 1);
+  return (totalValue)
 }
 
-function calculate_per_hour(dataPoints) {
-  return (dataPoints.countValue/dataPoints.totalValue)
+function calculate_per_hour(countValue, totalValue) {
+  openPerHour = countValue / totalValue;
+  openPerHour = round_values(openPerHour, 1);
+  return (openPerHour);
 }
 
-function calculate_last_opened(dataPoints) {
-  if (dataPoints.currentTemp <= 8.5 && dataPoints.prevTemp >= 8.6) {dataPoints.currentTime = dataPoints.lastValue}
-  else return (dataPoints.currentTime - dataPoints.lastValue)
+function calculate_last_opened(currentTime, currentTemp, prevTemp) {
+  let lastValue;
+  if (currentTemp <= 8.5 && prevTemp >= 8.6) {
+    lastValue = currentTime
+    console.log(`lastValue: ${lastValue}`);
+    return lastValue
+    
+  }
 }
 /* streamData.once("value", (snapshot) => {
   snapshot.ref.remove();
@@ -67,27 +74,38 @@ function update_count_value(dataPoints, countValue) {
   else return countValue;
 
 }
+function round_values(value, precision){
+  var multiplier = Math.pow(10, precision || 0)
+  value = Math.round(value * multiplier) / multiplier;
+  return value
+}
 
 function create_page_values(dataPoints) {
   let dataPoint = dataPoints[dataPoints.length - 1];
 
+  openedCount = update_count_value(dataPoints, openedCount);
+  let prevTemp = dataPoints[dataPoints.length - 2].temperature;
   let currentTemp = dataPoint.temperature;
   let currentHum = dataPoint.humidity;
   let currentTime = dataPoint.epochTime;
-  let totalValue = calculate_total_time(dataPoints);
-  let perValue = calculate_per_hour(dataPoints);
-  let lastValue = calculate_last_opened(dataPoints);
+  
+  let totalValue = calculate_total_time(currentTime);
+  let perValue = calculate_per_hour(openedCount, totalValue);
+  let lastValue = calculate_last_opened(currentTime, currentTemp, prevTemp);
+  console.log(`Last Opened: ${lastValue}`);
 
-  openedCount = update_count_value(dataPoints, openedCount);
+  
 
-  let totalTime = calculate_total_time(dataPoints);
-  let perHourValue = calcualte_per_hour(dataPoints);
-  let lastOpened = calculate_last_opened(dataPoints);
   let stringTime = JSON.stringify(dataPoint.epochTime);
 
   update_graph(stringTime);
+  console.log(`Total value: ${totalValue}`);
   
-  return [currentTemp, currentHum, openedCount, totalValue, totalTime];
+  return [currentTemp, currentHum, openedCount, perValue, lastValue];
+}
+
+function update_graph(time){
+  timeArray.push(time);
 }
 
 function update_page_values(tempValue, humValue, countValue, totalValue, perValue, lastValue) {
