@@ -52,6 +52,11 @@ function calculate_last_opened(dataPoints) {
     dataPoints.currentTime = dataPoints.lastValue;
   } else return dataPoints.currentTime - dataPoints.lastValue;
 }
+function calculate_last_opened(dataPoints) {
+  if (dataPoints.currentTemp <= 8.5 && dataPoints.prevTemp >= 8.6) {
+    dataPoints.currentTime = dataPoints.lastValue;
+  } else return dataPoints.currentTime - dataPoints.lastValue;
+}
 /* streamData.once("value", (snapshot) => {
   snapshot.ref.remove();
 }); */
