@@ -95,7 +95,7 @@ function create_page_values(dataPoints) {
 
   update_graph(Timmar);
 
-  return [currentTemp, currentHum, openedCount, totalTime];
+  return [currentTemp, currentHum, openedCount];
 }
 
 function update_graph(time) {
