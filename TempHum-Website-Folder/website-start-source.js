@@ -1,7 +1,7 @@
 let totalH = 0, timesO = 0, lastO = 0, hourAmount = 0;
 let tempSum = 0, minSum = 0;
 let hour = [12, 12, 12, 13];
-//let temp = [];
+let temp = [];
 let minO = [1, 2, 4, 1];
 let avgTemp = 0;
 let hum = 0;

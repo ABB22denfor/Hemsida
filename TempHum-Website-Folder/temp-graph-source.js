@@ -14,21 +14,21 @@ borderGradient.addColorStop(0, "rgba(0, 0, 0, 0.3)");
 borderGradient.addColorStop(1, "rgba(0, 0, 0, 0.1)");
 
 //Labels = Tid/X-axeln
-const labels = timeArray;
+let labels = timeArray;
 
 //Beskriver vad för data som grafen ska använda
 //x,
 //y
-const data = {
+let data = {
     labels,
     datasets: [
         {
-            data: [0, 7, 7, 8, 7.9, 8.4, 7.7, 8, 7.5, 7, 7.3 ,7.6, 8, 8.1, 8.3, 7.7, 8, 7, 7, 7.2, 7],
+            data: tempArray,
             label: "Temperatur",
             fill: true,
             backgroundColor: backgroundGradient,
             borderColor: borderGradient,
-            pointBackgroundColor: none,
+            pointBackgroundColor: null,
         },
     ],
 };
