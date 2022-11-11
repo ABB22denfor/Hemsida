@@ -1,4 +1,3 @@
-
 const firebaseConfig = {
   apiKey: "AIzaSyDLclgVeRlX41rhbNlMkZ5Pd-dcz4J-1tM",
   authDomain: "kylskap-c5f3b.firebaseapp.com",
@@ -72,7 +71,6 @@ function update_count_value(dataPoints, countValue) {
 
   if (currentTemp >= 8.6 && prevTemp <= 8.5) return countValue + 1;
   else return countValue;
-
 }
 function round_values(value, precision){
   var multiplier = Math.pow(10, precision || 0)
@@ -97,10 +95,12 @@ function create_page_values(dataPoints) {
   
 
   let stringTime = JSON.stringify(dataPoint.epochTime);
+  let Timmar = (TimeBetween - (TimeBetween % 3600)) / 3600;
+  console.log(`Timmar: ${Timmar}`);
+  Timmar = JSON.stringify(Timmar);
 
-  update_graph(stringTime);
-  console.log(`Total value: ${totalValue}`);
-  
+  update_graph(Timmar);
+
   return [currentTemp, currentHum, openedCount, perValue, lastValue];
 }
 
@@ -108,7 +108,14 @@ function update_graph(time){
   timeArray.push(time);
 }
 
-function update_page_values(tempValue, humValue, countValue, totalValue, perValue, lastValue) {
+function update_page_values(
+  tempValue,
+  humValue,
+  countValue,
+  totalValue,
+  perValue,
+  lastValue
+) {
   document.getElementById("tempValue").innerHTML = tempValue;
 
   document.getElementById("humValue").innerHTML = humValue;
@@ -119,5 +126,5 @@ function update_page_values(tempValue, humValue, countValue, totalValue, perValu
 
   document.getElementById("perValue").innerHTML = perValue;
 
-  document.getElementById("lastValue").innerHTML = lastValue
+  document.getElementById("lastValue").innerHTML = lastValue;
 }
