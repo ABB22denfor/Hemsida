@@ -13,9 +13,7 @@
 
 /* Lägger till en bild av en frys */
 body {
-    background: url("../Website-Images-Folder/kyl-image.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
+    background: url("../Website-Images-Folder/kyl-image.jpg") no-repeat center center;
     background-size:cover;
     margin: 0;
     padding: 0;
