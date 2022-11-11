@@ -15,6 +15,9 @@
 body {
     background: url("../Website-Images-Folder/kyl-image.jpg") no-repeat center center;
     background-size:cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     margin: 0;
     padding: 0;
 }
