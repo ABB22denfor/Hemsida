@@ -1,12 +1,12 @@
 //Använder Chart.js bibliotek
 
 //Hämta chart context från canvasen i 2D
-const ctx = document.getElementById('myChart').getContext("2d");
+const ctx = document.getElementById("myChart").getContext("2d");
 
 //Skapa backgroundGradient
 let backgroundGradient = ctx.createLinearGradient(0, 0, 0, 400);
 backgroundGradient.addColorStop(0, "rgba(255, 255, 255, 1)");
-backgroundGradient.addColorStop(1, "rgba(255, 255, 255, 0.1)")
+backgroundGradient.addColorStop(1, "rgba(255, 255, 255, 0.1)");
 
 //Skapa borderGradient
 let borderGradient = ctx.createLinearGradient(0, 0, 0, 400);
@@ -14,48 +14,48 @@ borderGradient.addColorStop(0, "rgba(0, 0, 0, 0.3)");
 borderGradient.addColorStop(1, "rgba(0, 0, 0, 0.1)");
 
 //Labels = Tid/X-axeln
-const labels = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
-"16", "17", "18", "19", "20"
-];
+const labels = timeArray;
 
 //Beskriver vad för data som grafen ska använda
 //x,
 //y
 const data = {
-    labels,
-    datasets: [
-        {
-            data: [0, 7, 7, 8, 7.9, 8.4, 7.7, 8, 7.5, 7, 7.3 ,7.6, 8, 8.1, 8.3, 7.7, 8, 7, 7, 7.2, 7],
-            label: "Temperatur",
-            fill: true,
-            backgroundColor: backgroundGradient,
-            borderColor: borderGradient
-        },
-    ],
+  labels,
+  datasets: [
+    {
+      data: [
+        0, 7, 7, 8, 7.9, 8.4, 7.7, 8, 7.5, 7, 7.3, 7.6, 8, 8.1, 8.3, 7.7, 8, 7,
+        7, 7.2, 7,
+      ],
+      label: "Temperatur",
+      fill: true,
+      backgroundColor: backgroundGradient,
+      borderColor: borderGradient,
+      pointBackgroundColor: null,
+    },
+  ],
 };
 
 //Fäster data och inställningar till grafen
 const config = {
-    type: 'line',
-    data: data,
-    options: {
-        responsive: true,
-        scales: {
-            y:{
-                ticks:{
-                    callback: function(value){
-                        return value + "°C"
-                    }
-                }
-            }
-        }
+  type: "line",
+  data: data,
+  options: {
+    responsive: true,
+    scales: {
+      y: {
+        ticks: {
+          callback: function (value) {
+            return value + "°C";
+          },
+        },
+      },
     },
+  },
 };
 
 //Skapar grafen
 const myChart = new Chart(ctx, config);
-
-
 
 //Försök att göra graf med hjälp av D3-biblioteket:
 /*
