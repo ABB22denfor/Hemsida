@@ -54,9 +54,10 @@ function calculate_last_opened(currentTime, currentTemp, prevTemp) {
   if (currentTemp <= 8.5 && prevTemp >= 8.6) {
     lastValue = currentTime
     console.log(`lastValue: ${lastValue}`);
-    return lastValue
+    return lastValue;
     
   }
+  return 0;
 }
 /* streamData.once("value", (snapshot) => {
   snapshot.ref.remove();
@@ -82,19 +83,26 @@ function create_page_values(dataPoints) {
   let dataPoint = dataPoints[dataPoints.length - 1];
 
   openedCount = update_count_value(dataPoints, openedCount);
-  let prevTemp = dataPoints[dataPoints.length - 2].temperature;
+
   let currentTemp = dataPoint.temperature;
   let currentHum = dataPoint.humidity;
   let currentTime = dataPoint.epochTime;
+
+
+  let prevTemp;
+  if (dataPoints.length < 2) prevTemp = currentTemp;
+  else prevTemp = dataPoints[dataPoints.length - 2].temperature;
+
   
   let totalValue = calculate_total_time(currentTime);
   let perValue = calculate_per_hour(openedCount, totalValue);
   let lastValue = calculate_last_opened(currentTime, currentTemp, prevTemp);
   console.log(`Last Opened: ${lastValue}`);
 
-  
-
   let stringTime = JSON.stringify(dataPoint.epochTime);
+
+  let TimeBetween = (currentTime - dataPoints[0].epochTime);
+
   let Timmar = (TimeBetween - (TimeBetween % 3600)) / 3600;
   console.log(`Timmar: ${Timmar}`);
   Timmar = JSON.stringify(Timmar);
@@ -108,14 +116,8 @@ function update_graph(time){
   timeArray.push(time);
 }
 
-function update_page_values(
-  tempValue,
-  humValue,
-  countValue,
-  totalValue,
-  perValue,
-  lastValue
-) {
+function update_page_values(tempValue, humValue, countValue, totalValue, perValue, lastValue) 
+{
   document.getElementById("tempValue").innerHTML = tempValue;
 
   document.getElementById("humValue").innerHTML = humValue;
