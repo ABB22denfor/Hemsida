@@ -1,3 +1,4 @@
+
 const firebaseConfig = {
   apiKey: "AIzaSyDLclgVeRlX41rhbNlMkZ5Pd-dcz4J-1tM",
   authDomain: "kylskap-c5f3b.firebaseapp.com",
@@ -39,13 +40,23 @@ streamData.on("child_added", (snapshot) => {
 
   update_page_values(tempValue, humValue, countValue);
   update_graph(null, tempValue);
+  calculate_total_time(dataPoints)
+  calculate_per_hour(dataPoints) 
 });
 
-function update_graph(time, temp) {
-  timeArray.push(time);
+function calculate_total_time, temp(dataPoints) {
+  return ((dataPoints.currentTime - 1667928163)/3600)
+}
+
+function calculate_per_hour(dataPoints) {
+  return (dataPoints.countValue/dataPoints.totalValue)
   tempArray.push(temp)
 }
 
+function calculate_last_opened(dataPoints) {
+  if (dataPoints.currentTemp <= 8.5 && dataPoints.prevTemp >= 8.6) {dataPoints.currentTime = dataPoints.lastValue}
+  else return (dataPoints.currentTime - dataPoints.lastValue)
+}
 /* streamData.once("value", (snapshot) => {
   snapshot.ref.remove();
 }); */
@@ -57,8 +68,9 @@ function update_count_value(dataPoints, countValue) {
   if (dataPoints.length < 2) prevTemp = currentTemp;
   else prevTemp = dataPoints[dataPoints.length - 2].temperature;
 
-  if (currentTemp <= 8.5 && prevTemp >= 8.6) return countValue + 1;
+  if (currentTemp >= 8.6 && prevTemp <= 8.5) return countValue + 1;
   else return countValue;
+
 }
 
 
@@ -68,6 +80,9 @@ function create_page_values(dataPoints) {
   let currentTemp = dataPoint.temperature;
   let currentHum = dataPoint.humidity;
   let currentTime = dataPoint.epochTime;
+  let totalValue = calculate_total_time(dataPoints);
+  let perValue = calculate_per_hour(dataPoints);
+  let lastValue = calculate_last_opened(dataPoints);
 
   openedCount = update_count_value(dataPoints, openedCount);
 
@@ -81,12 +96,16 @@ function create_page_values(dataPoints) {
   return [currentTemp, currentHum, openedCount];
 }
 
-function update_page_values(tempValue, humValue, countValue) {
+function update_page_values(tempValue, humValue, countValue, totalValue, perValue, lastValue) {
   document.getElementById("tempValue").innerHTML = tempValue;
 
   document.getElementById("humValue").innerHTML = humValue;
 
   document.getElementById("countValue").innerHTML = countValue;
+
+  document.getElementById("totalValue").innerHTML = totalValue;
+
+  document.getElementById("perValue").innerHTML = perValue;
+
+  document.getElementById("lastValue").innerHTML = lastValue
 }
-
-
