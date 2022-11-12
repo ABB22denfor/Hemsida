@@ -14,49 +14,71 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig); // importar firebase så att vi kan läsa databasen.
 
 var openedCount = 0;
+var stringTime;
 var dataPoints = [];
 var timeArray = [];
 var tempArray = [];
+var myChart = null
 
 dataBase = firebase.database();
 
 var streamData = dataBase.ref("/"); //Säger var koden ska läsa.
 
-streamData.on("child_added", (snapshot) => {
-  // När en ny mätning kommer in, så ska denna kod köras.
-  const dataPoint = snapshot.val();
+//Sätter ett promise så att alla värdena har laddats in innan grafen skapas
+let myPromise = new Promise(function(myResolve, myReject){
 
-  dataPoints.push(dataPoint);
+  streamData.on("child_added", (snapshot) => {
+    // När en ny mätning kommer in, så ska denna kod köras.
+    const dataPoint = snapshot.val();
+  
+    dataPoints.push(dataPoint);
+  
+    let [tempValue, humValue, countValue, stringTime] = create_page_values(dataPoints);
+  
+    console.log(
+      `tempvalue: ${tempValue}   
+      humValue: ${humValue}
+      countValue: ${countValue}
+      `
+    );
+    update_page_values(tempValue, humValue, countValue);
+    calculate_total_time(dataPoints)
+    calculate_per_hour(dataPoints) 
+    update_graph(stringTime, tempValue)
+    
+    myResolve("ok");
+    myReject("Error");
+  });
 
-  let [tempValue, humValue, countValue] = create_page_values(dataPoints);
+})
 
-  console.log(
-    `tempvalue: ${tempValue}   
-    humValue: ${humValue}
-    countValue: ${countValue}
-    tempArray ${tempArray}
-    timeArray ${timeArray}`
-  );
+//Hanterar om koden innuti promise skickade en error eller blev färdig
+myPromise.then(
+  function(value) {update_graph_values(myChart)},
+  function(error) {console.error(error)}
+)
 
-  update_page_values(tempValue, humValue, countValue);
-  update_graph(null, tempValue);
-  calculate_total_time(dataPoints)
-  calculate_per_hour(dataPoints) 
-});
 
-function calculate_total_time, temp(dataPoints) {
+//Uppdaterar listorna som grafen använder
+function update_graph(time, temp){
+  timeArray.push(time)
+  tempArray.push(temp)
+}
+
+function calculate_total_time(dataPoints) {
   return ((dataPoints.currentTime - 1667928163)/3600)
 }
 
 function calculate_per_hour(dataPoints) {
   return (dataPoints.countValue/dataPoints.totalValue)
-  tempArray.push(temp)
 }
 
 function calculate_last_opened(dataPoints) {
   if (dataPoints.currentTemp <= 8.5 && dataPoints.prevTemp >= 8.6) {dataPoints.currentTime = dataPoints.lastValue}
   else return (dataPoints.currentTime - dataPoints.lastValue)
 }
+
+
 /* streamData.once("value", (snapshot) => {
   snapshot.ref.remove();
 }); */
@@ -89,11 +111,8 @@ function create_page_values(dataPoints) {
   //let totalTime = calculate_total_time(dataPoints);
   /*let perHourValue = calcualte_per_hour(dataPoints);
   let lastOpened = calculate_last_opened(dataPoints);*/
-  let stringTime = JSON.stringify(currentTime);
-
-  update_graph(stringTime, null);
-  
-  return [currentTemp, currentHum, openedCount];
+  stringTime = JSON.stringify(currentTime);
+  return [currentTemp, currentHum, openedCount, stringTime];
 }
 
 function update_page_values(tempValue, humValue, countValue, totalValue, perValue, lastValue) {

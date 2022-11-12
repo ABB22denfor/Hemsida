@@ -2,6 +2,10 @@
 
 //Hämta chart context från canvasen i 2D
 const ctx = document.getElementById('myChart').getContext("2d");
+if(myChart != null){
+    myChart.destroy();
+}
+
 
 //Skapa backgroundGradient
 let backgroundGradient = ctx.createLinearGradient(0, 0, 0, 400);
@@ -14,24 +18,28 @@ borderGradient.addColorStop(0, "rgba(0, 0, 0, 0.3)");
 borderGradient.addColorStop(1, "rgba(0, 0, 0, 0.1)");
 
 //Labels = Tid/X-axeln
-let labels = timeArray;
+let labels = [];
+
 
 //Beskriver vad för data som grafen ska använda
 //x,
 //y
+//Datasets har attributerna: data som är värdena på Y-axeln,
+//label som säger vad det är som mäts,
+//backgroundColor osv är likt CSS
 let data = {
     labels,
     datasets: [
         {
-            data: tempArray,
+            data: [],
             label: "Temperatur",
             fill: true,
             backgroundColor: backgroundGradient,
             borderColor: borderGradient,
-            pointBackgroundColor: null,
         },
     ],
 };
+
 
 //Fäster data och inställningar till grafen
 const config = {
@@ -40,19 +48,60 @@ const config = {
     options: {
         responsive: true,
         scales: {
-            y:{
+            y:{ //Sätter enhet
                 ticks:{
                     callback: function(value){
                         return value + "°C"
                     }
                 }
             }
+        },
+        elements:{ //Tar bort punkterna från grafen
+            point:{
+                radius:0
+            }
         }
     },
 };
-
 //Skapar grafen
-const myChart = new Chart(ctx, config);
+myChart = new Chart(ctx, config);
+
+//Sätter värdena på grafen
+function update_graph_values(chart){
+    chart.data.datasets[0].data = tempArray;
+    chart.data.labels = timeArray;
+    chart.update();
+}
+//Hanterar användar input
+function handle_value_input(){
+    let value = document.getElementById("numberInsert").value;
+
+    set_visible_values(value, myChart)
+    
+}
+//Sätter värdena på grafen efter användarens input
+function set_visible_values(numberOfValues, chart){
+    let visibleTemps = chart.data.datasets[0].data.slice(-numberOfValues);
+    let visibleTimes = chart.data.labels.slice(-numberOfValues);
+    chart.data.datasets[0].data = visibleTemps;
+    chart.data.labels = visibleTimes;
+    chart.update();
+}
+
+// function update_graph(chart){
+//     const temps = tempArray.slice(-30);
+//     const times = timeArray.slice(-30);
+//     for(i = 0; i < temps.length; i++){
+//         chart.data.datasets[0].data.push(temps[i]);
+//     }
+//     for(i = 0; i < times.length; i++){
+//         chart.data.labels.push(times[i]);
+//     }
+//     console.log(`Temps: ${temps}`);
+//     console.log(`Times: ${times}`);
+//     console.log(`Data: ${chart.data.datasets[0].data}`);
+//     console.log(`Labels: ${chart.data.labels}`);
+// }
 
 
 

@@ -1,3 +1,5 @@
+//Den här koden används inte, innehåller bara exempelkod
+
 let totalH = 0, timesO = 0, lastO = 0, hourAmount = 0;
 let tempSum = 0, minSum = 0;
 let hour = [12, 12, 12, 13];
@@ -34,7 +36,3 @@ for(i = 0; i< temp.length; i++){
     }
 }
 
-console.log("Total minutes opened: " + sum(minSum, minO))
-console.log("Opened " + timesO + " times");
-console.log("Total hours opened: " + totalH + "h");
-console.log('Last Opened: ' + lastO);
