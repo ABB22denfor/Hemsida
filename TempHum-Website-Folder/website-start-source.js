@@ -22,7 +22,7 @@ function avg(sum, array) {
 sum(tempSum, temp)
 minSum = sum(minSum, minO);
 totalH = minSum / 60;
-totalH = round(totalH, 2);
+// totalH = round(totalH, 2);
 
 lastO = hour[hour.length - 1];
 

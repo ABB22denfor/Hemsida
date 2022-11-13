@@ -32,7 +32,7 @@ let myPromise = new Promise(function(myResolve, myReject){
   
     dataPoints.push(dataPoint);
   
-    let [tempValue, humValue, countValue, stringTime] = create_page_values(dataPoints);
+    let [tempValue, humValue, countValue, totalValue, perValue, lastValue, Timmar] = create_page_values(dataPoints);
   
     console.log(
       `tempvalue: ${tempValue}   
@@ -40,12 +40,10 @@ let myPromise = new Promise(function(myResolve, myReject){
       countValue: ${countValue}
       `
     );
-    update_page_values(tempValue, humValue, countValue);
-    calculate_total_time(dataPoints)
-    calculate_per_hour(dataPoints) 
-    update_graph(stringTime, tempValue)
+    update_page_values(tempValue, humValue, countValue, totalValue, perValue, lastValue);
+    update_graph_lists(Timmar, tempValue)
     
-    myResolve("ok");
+    myResolve();
     myReject("Error");
   });
 
@@ -53,19 +51,19 @@ let myPromise = new Promise(function(myResolve, myReject){
 
 //Hanterar om koden innuti promise skickade en error eller blev färdig
 myPromise.then(
-  function(value) {update_graph_values(myChart)},
+  function() {update_graph_values(myChart)},
   function(error) {console.error(error)}
 )
 
 
 //Uppdaterar listorna som grafen använder
-function update_graph(time, temp){
+function update_graph_lists(time, temp){
   timeArray.push(time)
   tempArray.push(temp)
 }
 
-function calculate_total_time(dataPoints) {
-  return ((dataPoints.currentTime - 1667928163)/3600)
+function calculate_total_time(time) {
+  return ((time - 1667928163)/3600)
 }
 
 function calculate_per_hour(countValue, totalValue) {
@@ -74,15 +72,9 @@ function calculate_per_hour(countValue, totalValue) {
   return (openPerHour);
 }
 
-function calculate_last_opened(currentTime, currentTemp, prevTemp) {
-  let lastValue;
-  if (currentTemp <= 8.5 && prevTemp >= 8.6) {
-    lastValue = currentTime
-    console.log(`lastValue: ${lastValue}`);
-    return lastValue;
-    
-  }
-  return 0;
+function calculate_last_opened(currentTime) {
+  lastValue = currentTime
+  return lastValue;
 }
 
 
@@ -124,10 +116,15 @@ function create_page_values(dataPoints) {
   
   let totalValue = calculate_total_time(currentTime);
   let perValue = calculate_per_hour(openedCount, totalValue);
-  let lastValue = calculate_last_opened(currentTime, currentTemp, prevTemp);
+  perValue = round_values(perValue, 1);
+  totalValue = round_values(totalValue, 1);
+  let lastValue;
+  if (currentTemp <= 8.5 && prevTemp >= 8.6) {
+    lastValue = calculate_last_opened(currentTime);
+  }
+
   console.log(`Last Opened: ${lastValue}`);
 
-  let stringTime = JSON.stringify(dataPoint.epochTime);
 
   let TimeBetween = (currentTime - dataPoints[0].epochTime);
 
@@ -135,25 +132,11 @@ function create_page_values(dataPoints) {
   console.log(`Timmar: ${Timmar}`);
   Timmar = JSON.stringify(Timmar);
 
-  update_graph(Timmar);
 
-  return [currentTemp, currentHum, openedCount, perValue, lastValue];
+  return [currentTemp, currentHum, openedCount, totalValue, perValue, lastValue, Timmar];
 }
 
-function update_graph(time){
-  timeArray.push(time);
-  let totalValue = calculate_total_time(dataPoints);
-  let perValue = calculate_per_hour(dataPoints);
-  let lastValue = calculate_last_opened(dataPoints);
 
-  openedCount = update_count_value(dataPoints, openedCount);
-
-  //let totalTime = calculate_total_time(dataPoints);
-  /*let perHourValue = calcualte_per_hour(dataPoints);
-  let lastOpened = calculate_last_opened(dataPoints);*/
-  stringTime = JSON.stringify(currentTime);
-  return [currentTemp, currentHum, openedCount, stringTime];
-}
 
 function update_page_values(tempValue, humValue, countValue, totalValue, perValue, lastValue) 
 {
