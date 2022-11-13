@@ -85,40 +85,41 @@ function round_values(value, precision) {
   var multiplier = Math.pow(10, precision || 0);
   value = Math.round(value * multiplier) / multiplier;
   return value;
-} // funktion som rundar av values
+} // funktion som förskjuter talet, avrundar det, och förskjuter tillbaka det
 
 function create_page_values(dataPoints) {
   let dataPoint = dataPoints[dataPoints.length - 1];
 
-  openedCount = update_count_value(dataPoints, openedCount);
+  openedCount = update_count_value(dataPoints, openedCount); // definerar openedCount med hjälp av funktionen innan.
 
   let currentTemp = dataPoint.temperature;
   let currentHum = dataPoint.humidity;
-  let currentTime = dataPoint.epochTime;
+  let currentTime = dataPoint.epochTime; // splittrar den senaste mättningen i arryn till de olika variabeln.
 
   let prevTemp;
   if (dataPoints.length < 2) prevTemp = currentTemp;
-  else prevTemp = dataPoints[dataPoints.length - 2].temperature;
+  // ser till att prevTemp inte blir assigned en value som inte finns ännu.
+  else prevTemp = dataPoints[dataPoints.length - 2].temperature; // ger prevTemp den näst senaste valuen i datapoints.temperature.
 
   let totalValue = calculate_total_time(currentTime);
   let perValue = calculate_per_hour(openedCount, totalValue);
-  let lastValue = calculate_last_opened(currentTime, currentTemp, prevTemp);
-  console.log(`Last Opened: ${lastValue}`);
+  let lastValue = calculate_last_opened(currentTime, currentTemp, prevTemp); // ger variablerna values med hjälp av funktioner.
+  console.log(`Last Opened: ${lastValue}`); //skickar till consolen LastValue for debugging
 
-  let TimeBetween = currentTime - dataPoints[0].epochTime;
+  let TimeBetween = currentTime - dataPoints[0].epochTime; // Ger variablen tiden mellann den senaste mättningen och den första mättningen som en value
 
-  let Timmar = (TimeBetween - (TimeBetween % 3600)) / 3600;
-  console.log(`Timmar: ${Timmar}`);
-  Timmar = JSON.stringify(Timmar);
+  let Timmar = (TimeBetween - (TimeBetween % 3600)) / 3600; // räknar hur många timmar det har gått eftersom TimeBetween är i sekunder
+  console.log(`Timmar: ${Timmar}`); // till consolen för debugging
+  Timmar = JSON.stringify(Timmar); // stringify timmer så att det fungerar till grafen.
 
-  update_graph(Timmar);
+  update_graph(Timmar); // uppdaterar grafen med hjälp av en funktion
 
   return [currentTemp, currentHum, openedCount, perValue, lastValue];
-}
+} // funktionen som ger variablerna som temp deras senaste values.
 
 function update_graph(time) {
   timeArray.push(time);
-}
+} // funktion som skickar hur många timmar det har gått till en array som används för grafen
 
 function update_page_values(
   tempValue,
@@ -139,4 +140,4 @@ function update_page_values(
   document.getElementById("perValue").innerHTML = perValue;
 
   document.getElementById("lastValue").innerHTML = lastValue;
-}
+} // koden som gör så att variablerna som tempValue visas på hemsidan.
