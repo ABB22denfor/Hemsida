@@ -132,9 +132,8 @@ function create_page_values(dataPoints) {
   console.log(`Timmar: ${Timmar}`); // till consolen för debugging
   Timmar = JSON.stringify(Timmar); // stringify timmer så att det fungerar till grafen.
 
-  update_graph(Timmar); // uppdaterar grafen med hjälp av en funktion
 
-  return [currentTemp, currentHum, openedCount, perValue, lastValue];
+  return [currentTemp, currentHum, openedCount, totalValue, perValue, lastValue, Timmar];
 } // funktionen som ger variablerna som temp deras senaste values.
 
 
