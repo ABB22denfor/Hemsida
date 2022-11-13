@@ -10,7 +10,7 @@ if(myChart != null){
 //Skapa backgroundGradient
 let backgroundGradient = ctx.createLinearGradient(0, 0, 0, 400);
 backgroundGradient.addColorStop(0, "rgba(255, 255, 255, 1)");
-backgroundGradient.addColorStop(1, "rgba(255, 255, 255, 0.1)")
+backgroundGradient.addColorStop(1, "rgba(255, 255, 255, 0.1)");
 
 //Skapa borderGradient
 let borderGradient = ctx.createLinearGradient(0, 0, 0, 400);
