@@ -20,11 +20,8 @@ function avg(sum, array) {
   average = sum / array.length;
   return average;
 }
-function round(value, precision) {
-  var multiplier = Math.pow(10, precision || 0);
-  return Math.round(value * multiplier) / multiplier;
-}
-sum(tempSum, temp);
+
+sum(tempSum, temp)
 minSum = sum(minSum, minO);
 totalH = minSum / 60;
 totalH = round(totalH, 2);
@@ -40,5 +37,5 @@ for (i = 0; i < temp.length; i++) {
 
 console.log("Total minutes opened: " + sum(minSum, minO));
 console.log("Opened " + timesO + " times");
-console.log("Total hours opened: " + totalH + "h");
-console.log("Last Opened: " + lastO);
+console.log("TotalH: " + totalH + "h");
+console.log('Last Opened: ' + lastO);
